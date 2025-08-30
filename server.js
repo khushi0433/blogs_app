@@ -13,11 +13,14 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+const indexRouter = require('./index');
+app.use('/', indexRouter);
 
 app.use('/posts', postRouter);
 app.use('/user', userRouter);
 app.use('/comment', commentRouter);
 app.use('/auth', authRouter);
+
 
 app.use(async (error, req, res, next) => {
     if (req.body && req.body.username && req.body.password) {
